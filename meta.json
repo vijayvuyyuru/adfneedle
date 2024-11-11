@@ -7,7 +7,7 @@
   "models": [
     {
       "api": "rdk:component:sensor",
-      "model": "viam-data-ml:adfneedle:adfneedle"
+      "model": "viam-data-ml:sensor:adfneedle"
     }
   ],
   "entrypoint": "dist/main",
