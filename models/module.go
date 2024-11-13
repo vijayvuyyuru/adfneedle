@@ -33,8 +33,8 @@ func init() {
 }
 
 type Config struct {
-	limit      int
-	secretPath string
+	Limit      int
+	SecretPath string
 	// Put config attributes here
 
 	/* if your model  does not need a config,
@@ -98,21 +98,21 @@ func newAdfneedleSensor(ctx context.Context, deps resource.Dependencies, rawConf
 		cfg:         conf,
 		cancelCtx:   cancelCtx,
 		cancelFunc:  cancelFunc,
-		secretPath:  conf.secretPath,
-		limit:       conf.limit,
+		secretPath:  conf.SecretPath,
+		limit:       conf.Limit,
 		mongoclient: client,
 	}
 	return s, nil
 }
 
 func validateConfigAndGetURL(conf *Config) (string, error) {
-	if conf.limit == 0 {
+	if conf.Limit == 0 {
 		return "", errNonZeroLimit
 	}
-	if conf.secretPath == "" {
+	if conf.SecretPath == "" {
 		return "", errNoPath
 	}
-	jsonFile, err := os.Open(conf.secretPath)
+	jsonFile, err := os.Open(conf.SecretPath)
 	if err != nil {
 		return "", errors.Wrap(err, "failed to open json file")
 	}
@@ -140,10 +140,10 @@ func (s *adfneedleSensor) Reconfigure(ctx context.Context, deps resource.Depende
 	if err != nil {
 		return err
 	}
-	if confStruct.limit == 0 {
+	if confStruct.Limit == 0 {
 		return errNonZeroLimit
 	}
-	if confStruct.secretPath == "" {
+	if confStruct.SecretPath == "" {
 		return errNoPath
 	}
 	url, err := validateConfigAndGetURL(confStruct)
@@ -158,8 +158,8 @@ func (s *adfneedleSensor) Reconfigure(ctx context.Context, deps resource.Depende
 		s.logger.Errorw("error connecting to mongo client", "error", err)
 		return errors.Wrap(err, "error connecting to client")
 	}
-	s.limit = confStruct.limit
-	s.secretPath = confStruct.secretPath
+	s.limit = confStruct.Limit
+	s.secretPath = confStruct.SecretPath
 	s.mongoclient = client
 	return nil
 }
