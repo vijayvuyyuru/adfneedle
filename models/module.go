@@ -33,8 +33,8 @@ func init() {
 }
 
 type Config struct {
-	Limit      int
-	SecretPath string
+	Limit      int    `json:"limit"`
+	SecretPath string `json:"secret_path"`
 	// Put config attributes here
 
 	/* if your model  does not need a config,
