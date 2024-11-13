@@ -3,19 +3,19 @@
   "module_id": "viam-data-ml:adfneedle",
   "visibility": "private",
   "url": "https://github.com/vijayvuyyuru/adfneedle",
-  "description": "Modular sensor component: sensor",
+  "description": "Modular sensor component: adfneedle",
   "models": [
     {
       "api": "rdk:component:sensor",
-      "model": "viam-data-ml:adfneedle:sensor"
+      "model": "viam-data-ml:sensor:adfneedle"
     }
   ],
-  "entrypoint": "bin/adfneedle",
+  "entrypoint": "dist/main",
   "first_run": "",
   "build": {
-    "build": "make module.tar.gz",
-    "setup": "make setup",
-    "path": "bin/module.tar.gz",
+    "build": "./build.sh",
+    "setup": "./setup.sh",
+    "path": "dist/archive.tar.gz",
     "arch": [
       "linux/amd64",
       "linux/arm64"
