@@ -65,7 +65,8 @@ class Adfneedle(Sensor, EasyResource):
             self.secret_path = str(attrs.get("secret_path"))
         else:
             raise Exception("secret path must be specified")
-        LOGGER.debug(f"Using limit: {self.limit}")
+        
+        LOGGER.info(f"Using limit: {self.limit} and secret path {self.secret_path}")
         """This method allows you to dynamically update your service when it receives a new `config` object.
 
         Args:
@@ -82,13 +83,15 @@ class Adfneedle(Sensor, EasyResource):
         **kwargs
     ) -> Mapping[str, SensorReading]:
         client = MongoClient(get_value_from_json(self.secret_path, "url"))
+        LOGGER.info("connected to mongo client, running query")
         result = client['syncDB']['data_federations'].aggregate([
             {
                 '$count': 'count'
             }
         ])
+        LOGGER.info("ran query")
         count_dict = result.next()
-        
+        LOGGER.info(count_dict)
         return {
             "limit": self.limit,
             "count": count_dict['count'],
