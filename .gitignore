@@ -27,3 +27,4 @@ go.work.sum
 # Build outputs
 bin
 *tar.gz
+needle

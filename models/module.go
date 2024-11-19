@@ -69,7 +69,6 @@ type adfneedleSensor struct {
 
 	// Uncomment this if the model does not have any goroutines that
 	// need to be shut down while closing.
-	resource.TriviallyCloseable
 }
 
 func newAdfneedleSensor(ctx context.Context, deps resource.Dependencies, rawConf resource.Config, logger logging.Logger) (sensor.Sensor, error) {
